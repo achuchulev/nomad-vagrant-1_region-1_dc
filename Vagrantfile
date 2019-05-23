@@ -1,4 +1,3 @@
-#(1..2).each do |dc|
 Vagrant.configure("2") do |config|
 
   config.trigger.before [:up] do |trigger|
@@ -47,4 +46,3 @@ Vagrant.configure("2") do |config|
     vb.cpus = "1"
   end
 end
-#end
