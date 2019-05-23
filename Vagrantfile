@@ -6,10 +6,10 @@ Vagrant.configure("2") do |config|
   end
 
   (1..3).each do |i|
-    config.vm.define vm_name="server#{dc}#{i}" do |server|
+    config.vm.define vm_name="server#{i}" do |server|
       server.vm.box = "achuchulev/xenial64"
-      server.vm.hostname = "server#{dc}#{i}"
-      server.vm.network "private_network", ip: "192.168.10.#{dc}#{i}"
+      server.vm.hostname = "server#{i}"
+      server.vm.network "private_network", ip: "192.168.10.1#{i}"
       server.vm.synced_folder ".", "/vagrant", disabled: false
       server.vm.provision "shell", path: "install/tools.sh", privileged: "true"
       server.vm.provision "shell", path: "install/cfssl.sh", privileged: "true"
@@ -23,10 +23,10 @@ Vagrant.configure("2") do |config|
   end
 
   (1..1).each do |i|
-    config.vm.define vm_name="client#{dc}#{i}" do |client|
+    config.vm.define vm_name="client#{i}" do |client|
       client.vm.box = "achuchulev/xenial64"
-      client.vm.hostname = "client#{dc}#{i}"
-      client.vm.network "private_network", ip: "192.168.10.1#{dc}#{i}"
+      client.vm.hostname = "client#{i}"
+      client.vm.network "private_network", ip: "192.168.10.2#{i}"
       client.vm.synced_folder ".", "/vagrant", disabled: false
       client.vm.provision "shell", path: "install/tools.sh", privileged: "true"
       client.vm.provision "shell", path: "install/driver.sh", privileged: "true"
