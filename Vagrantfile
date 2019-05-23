@@ -40,6 +40,18 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define vm_name="frontend" do |frontend|
+    frontend.vm.box = "achuchulev/xenial64"
+    frontend.vm.hostname = "frontend"
+    frontend.vm.network "private_network", ip: "192.168.10.250"
+    frontend.vm.synced_folder ".", "/vagrant", disabled: false
+    frontend.vm.provision "shell", path: "install/tools.sh", privileged: "true"
+    frontend.vm.provision "shell", path: "install/cfssl.sh", privileged: "true"
+    frontend.vm.provision "shell", path: "install/nginx.sh", privileged: "true"
+    frontend.vm.provision "shell", inline: "echo '{}' | cfssl gencert -ca='/vagrant/ssl/ca/nomad-ca.pem' -ca-key='/vagrant/ssl/ca/nomad-ca-key.pem' -profile=client - | cfssljson -bare 'nomad/ssl/cli'"
+    frontend.vm.provision "shell", path: "install/run_nginx.sh", privileged: "true"
+  end
+
   # Set memory & CPU for Virtualbox
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "512"
