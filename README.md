@@ -20,7 +20,7 @@ cd nomad-vagrant-1_region-1_dc
 vagrant up
 ```
 
-#### `vagrant up` will spin up 7 virtualbox vms (3 nomad servers, 3 nomad clients and 1 frontend) and execute scripts that:
+#### `vagrant up` spin up 7 virtualbox vms (3 nomad servers, 3 nomad clients and 1 frontend) and execute scripts:
 
 ##### locally
 
