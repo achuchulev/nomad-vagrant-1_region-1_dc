@@ -13,6 +13,11 @@ advertise {
 # Enable the client
 client {
   enabled = true
+  server_join {
+    retry_join = ["192.168.10.11", "192.168.10.12", "192.168.10.13"]
+    retry_max = 5
+    retry_interval = "15s"
+  }
 
   options = {
     "driver.raw_exec" = "1"
