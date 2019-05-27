@@ -1,7 +1,7 @@
 # Single region & single DC Nomad cluster with mutual TLS (mTLS) 
 
 ### High-level overview
-<img src="diagrams/Nomad_with_mTLS.png" />
+<img src="diagrams/nginx-reverse-proxy-nomad-1dc-1region.png" />
 
 ### Pre-requisites
 
