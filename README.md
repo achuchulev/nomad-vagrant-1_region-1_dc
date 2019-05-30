@@ -14,9 +14,9 @@
 ##### Get the repo and bring up the environment
 
 ```
-git clone https://github.com/achuchulev/nomad-vagrant-1_region-1_dc.git
-cd nomad-vagrant-1_region-1_dc
-vagrant up
+$ git clone https://github.com/achuchulev/nomad-vagrant-1_region-1_dc.git
+$ cd nomad-vagrant-1_region-1_dc
+$ vagrant up
 ```
 
 ##### `vagrant up` will spin up 7 virtualbox vms - 3 nomad servers, 3 nomad clients and 1 frontend
@@ -29,10 +29,11 @@ vagrant up
 
 #### via CLI
 
-ssh to any server or client virtualbox vm
+ssh to any server or client vm
 
 ```
-vagrant ssh <box_name>
+$ vagrant ssh <box_name>
+$ nomad server mebers
 ```
 
 ### Run nomad job
@@ -49,7 +50,7 @@ vagrant ssh <box_name>
 #### via CLI
 
 ```
-nomad job run [options] <job file>
+$ nomad job run [options] <job file>
 ```
 
 
