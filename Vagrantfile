@@ -1,5 +1,9 @@
+
+SERVER_COUNT = 3
+CLIENT_COUNT = 3
+
 Vagrant.configure("2") do |config|
-  (1..3).each do |i|
+  (1..(SERVER_COUNT)).each do |i|
     config.vm.define vm_name="server#{i}" do |server|
       server.vm.box = "achuchulev/nomad-server"
       server.vm.box_version = "0.0.1"
@@ -9,7 +13,7 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  (1..1).each do |i|
+  (1..(CLIENT_COUNT)).each do |i|
     config.vm.define vm_name="client#{i}" do |client|
       client.vm.box = "achuchulev/nomad-client"
       client.vm.box_version = "0.0.1"
