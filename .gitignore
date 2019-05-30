@@ -1,3 +1,10 @@
 .vagrant/
 ssl/
 .DS_Store
+
+*.box
+*.vbox
+.kitchen/
+Gemfile.lock
+.ruby-version
+output-*/*
