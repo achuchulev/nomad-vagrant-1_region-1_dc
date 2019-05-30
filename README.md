@@ -1,4 +1,4 @@
-# one region & one dc nomad cluster with mutual tls 
+# Nomad cluster in one region & one dc nomad cluster
 
 ### High-level overview
 <img src="diagrams/nginx-reverse-proxy-nomad-1dc-1region.png" />
