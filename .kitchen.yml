@@ -1,0 +1,21 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: shell
+
+platforms:
+  - name: xenial64
+    driver:
+      box: achuchulev/xenial64
+      provider: virtualbox
+
+verifier:
+  name: inspec
+
+suites:
+  - name: default
+    verifier:
+      inspec_tests:
+        - test/integration/default
