@@ -1,6 +1,6 @@
 
 SERVER_COUNT = 3
-CLIENT_COUNT = 3
+CLIENT_COUNT = 1
 
 Vagrant.configure("2") do |config|
   (1..(SERVER_COUNT)).each do |i|
@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
       server.vm.hostname = "server#{i}"
       server.vm.network "private_network", ip: "192.168.10.1#{i}"
       server.vm.synced_folder ".", "/vagrant", disabled: false
+      server.vm.provision "shell", path: "scripts/eth_adjust.sh", privileged: "true"
     end
   end
 
@@ -20,6 +21,7 @@ Vagrant.configure("2") do |config|
       client.vm.hostname = "client#{i}"
       client.vm.network "private_network", ip: "192.168.10.2#{i}"
       client.vm.synced_folder ".", "/vagrant", disabled: false
+      client.vm.provision "shell", path: "scripts/eth_adjust.sh", privileged: "true"
     end
   end
 
