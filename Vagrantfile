@@ -2,6 +2,19 @@
 SERVER_COUNT = 3
 CLIENT_COUNT = 1
 
+$script = <<-SCRIPT
+# get host private IP
+IP=$(hostname -I | cut -f2 -d' ')
+
+# adjust IP to bind
+[ -d /etc/nomad.d/ ] && {
+  sed -i "s/0.0.0.0/${IP}/g" /etc/nomad.d/*.hcl
+}
+
+# Restart Nomad service
+systemctl restart nomad.service
+SCRIPT
+
 Vagrant.configure("2") do |config|
   (1..(SERVER_COUNT)).each do |i|
     config.vm.define vm_name="server#{i}" do |server|
@@ -10,7 +23,7 @@ Vagrant.configure("2") do |config|
       server.vm.hostname = "server#{i}"
       server.vm.network "private_network", ip: "192.168.10.1#{i}"
       server.vm.synced_folder ".", "/vagrant", disabled: false
-      server.vm.provision "shell", path: "scripts/eth_adjust.sh", privileged: "true"
+      server.vm.provision "shell", inline: $script, privileged: "true"
     end
   end
 
@@ -21,7 +34,7 @@ Vagrant.configure("2") do |config|
       client.vm.hostname = "client#{i}"
       client.vm.network "private_network", ip: "192.168.10.2#{i}"
       client.vm.synced_folder ".", "/vagrant", disabled: false
-      client.vm.provision "shell", path: "scripts/eth_adjust.sh", privileged: "true"
+      client.vm.provision "shell", inline: $script, privileged: "true"
     end
   end
 
