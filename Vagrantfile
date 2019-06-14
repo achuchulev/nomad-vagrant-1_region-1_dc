@@ -11,6 +11,9 @@ IP=$(hostname -I | cut -f2 -d' ')
   sed -i "s/0.0.0.0/${IP}/g" /etc/nomad.d/*.hcl
 }
 
+echo 'datacenter = "dc1"' >> /etc/nomad.d/*.hcl
+echo 'region = "global"' >> /etc/nomad.d/*.hcl
+
 # Restart Nomad service
 systemctl restart nomad.service
 SCRIPT
